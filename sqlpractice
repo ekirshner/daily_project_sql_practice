@@ -1,0 +1,25 @@
+1)  Were there more male or female voters in Greensboro?
+        select id from cities where name = 'Greensboro';            (68)
+        select count(id) from votes where "cityId" = 68 And gender = 'male';  (396)
+        select count(*) from votes where "cityId" = 68;             (800)
+
+        Answer: There are more female voters in Greensboro
+
+2)  What is the average age of voters in Orlando?
+        select id from cities where name = 'Orlando';       (77)
+        select AVG(age) from votes where "cityId" = 77;
+
+        Answer: 51
+
+3)  Which state has the most cities listed?
+        SELECT "stateId", COUNT(*)  FROM cities   GROUP BY "stateId" order by 2 desc limit 1;   (3) 
+        select states.name from states join cities on states.id = "stateId" where "stateId" = 3 limit 1;
+
+        Answer: California
+
+4)  Which state had the most votes placed?
+        select states.name, count(votes.id) from states join cities on states.id = cities."stateId" join votes on votes."cityId" = cities.id group by states.name order by count(votes.id) desc limit 1;
+
+
+        Answer: California
+
